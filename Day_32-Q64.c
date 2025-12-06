@@ -1,34 +1,50 @@
-//Q62: Reverse an array without taking extra space.
+//Q64: Find the digit that occurs the most times in an integer number.
 
 /*
 Sample Test Cases:
 Input 1:
-4
-1 2 3 4
+112233
 Output 1:
-4 3 2 1
+1
+
+Input 2:
+887799
+Output 2:
+7
 
 */
 
 #include <stdio.h>
 
 int main() {
-    int n = 0;
-    scanf("%d", &n);
-    int arr[n];
-    for (int i = 0; i < n; i++) {
-        scanf("%d", &arr[i]);
+
+    long n;
+    scanf("%d",&n);
+    int arr[10] = {0,0,0,0,0,0,0,0,0,0};
+
+    if (n == 0) {
+        return 0;
     }
-    int left = 0, right = n-1;
-    while (left <= right) {
-        int temp = arr[left];
-        arr[left] = arr[right];
-        arr[right] = temp;
-        left++;
-        right--;
+    if (n < 0) {
+        n = -n;
     }
-    for (int i = 0; i < n; i++) {
-        printf("%d ", arr[i]);
+
+    while(n > 0) {
+        int rem = n % 10;
+        arr[rem] += 1;
+        n = n / 10;
     }
+
+    int maxFrequency = arr[0];
+    int digit = 0;
+    for (int i = 0; i < 10; i++) {
+        if (arr[i] > maxFrequency) {
+            maxFrequency = arr[i];
+            digit = i;
+        }
+    }
+
+    printf("%d",digit);
+
     return 0;
 }
